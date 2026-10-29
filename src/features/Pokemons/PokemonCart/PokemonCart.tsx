@@ -1,13 +1,12 @@
 import { Link } from "expo-router"
 import { Image, Pressable, Text } from "react-native"
-
-import { Pokemon } from "../types"
+import type { PokemonWithDetails } from "../types"
 import { styles } from "./styles/pokemonCartStyles"
 
 type PokemonCartProps = {
-    pokemon: Pokemon
+    pokemon: PokemonWithDetails
 }
-const PokemonCart = ({ pokemon: { name, details } }: PokemonCartProps) => {
+const PokemonCart = ({ pokemon: { name, imageSrc } }: PokemonCartProps) => {
     return (
         <Link
             style={styles.elem}
@@ -18,7 +17,7 @@ const PokemonCart = ({ pokemon: { name, details } }: PokemonCartProps) => {
             asChild
         >
             <Pressable>
-                <Image source={{ uri: details.imageSrc }} style={styles.image} resizeMode="contain" />
+                <Image source={{ uri: imageSrc ?? undefined }} style={styles.image} resizeMode="contain" />
                 <Text style={styles.title}>{name}</Text>
             </Pressable>
         </Link>

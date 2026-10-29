@@ -13,7 +13,11 @@ function QueryProvider({ children }: { children: React.ReactNode }) {
 export default function RootLayout() {
     return (
         <QueryProvider>
-            <Stack>
+            <Stack
+                screenOptions={{
+                    headerTransparent: false,
+                }}
+            >
                 <Stack.Screen
                     name="index"
                     options={{

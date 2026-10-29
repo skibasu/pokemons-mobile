@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query"
 import { ScrollView, Text, View } from "react-native"
 import PokemonCart from "../PokemonCart/PokemonCart"
 import { fetchPokemons } from "../services/pokemonsFetch"
-import { styles } from "../styles/globalStyles"
+import { styles } from "./styles/pokemonListStyles"
 
 const PokemonsList = () => {
-    const { data: pokemons, isLoading: loading, isError: error } = useQuery({ queryKey: ["pokemons"], queryFn: async () => fetchPokemons() })
+    const { data: pokemons, isLoading, isError } = useQuery({ queryKey: ["pokemons"], queryFn: fetchPokemons })
 
-    if (loading) {
+    if (isLoading) {
         return (
             <View style={styles.container}>
                 <Text>Loading ... </Text>
@@ -15,10 +15,10 @@ const PokemonsList = () => {
         )
     }
 
-    if (error) {
+    if (isError) {
         return (
             <View style={styles.container}>
-                <Text>Error fetching pokemons</Text>
+                <Text>Something went wrong</Text>
             </View>
         )
     }

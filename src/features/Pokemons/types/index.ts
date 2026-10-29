@@ -1,11 +1,20 @@
-export type PokemonDetails = { imageSrc: string }
-
-export type Pokemon = {
+export type PokemonApiItem = {
     name: string
     url: string
-    details: PokemonDetails
 }
 
-export interface PokemonResult {
-    results: Pokemon[]
+export type PokemonDetails = {
+    imageSrc: string | null
+}
+
+export type PokemonWithDetails = PokemonApiItem & PokemonDetails
+
+export type PokemonListResponse = {
+    results: PokemonApiItem[]
+}
+
+export type PokemonDetailsResponse = {
+    sprites: {
+        front_default: string | null
+    }
 }
