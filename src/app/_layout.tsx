@@ -1,18 +1,23 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { useReactQueryDevTools } from "@dev-plugins/react-query"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Stack, useLocalSearchParams } from "expo-router"
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+const queryClient = new QueryClient()
 
-SplashScreen.preventAutoHideAsync();
+function QueryProvider({ children }: { children: React.ReactNode }) {
+    useReactQueryDevTools(queryClient)
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
-  );
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+}
+
+export default function RootLayout() {
+    const { name: title } = useLocalSearchParams<{ name: string }>()
+    return (
+        <QueryProvider>
+            <Stack>
+                <Stack.Screen name="index" options={{ title: "Pokemons", headerTransparent: false, headerShown: true }} />
+                <Stack.Screen name="details/[name]" options={{ title: title ?? "Pokemon Details", headerTransparent: false, headerBackButtonDisplayMode: "minimal" }} />
+            </Stack>
+        </QueryProvider>
+    )
 }
