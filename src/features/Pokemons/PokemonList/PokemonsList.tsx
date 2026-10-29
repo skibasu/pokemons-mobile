@@ -4,8 +4,8 @@ import PokemonCart from "../PokemonCart/PokemonCart"
 import { fetchPokemons } from "../services/pokemonsFetch"
 import { styles } from "../styles/globalStyles"
 
-const PokemonsList = ({ url }: { url: string }) => {
-    const { data: pokemons, isLoading: loading, isError: error } = useQuery({ queryKey: ["pokemons", url], queryFn: async () => fetchPokemons(url) })
+const PokemonsList = () => {
+    const { data: pokemons, isLoading: loading, isError: error } = useQuery({ queryKey: ["pokemons"], queryFn: async () => fetchPokemons() })
 
     if (loading) {
         return (

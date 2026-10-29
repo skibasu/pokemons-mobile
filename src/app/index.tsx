@@ -1,5 +1,5 @@
 import Pokemons from "../features/Pokemons"
 
-export default function Index() {
+export default function HomeScreen() {
     return <Pokemons />
 }
