@@ -7,7 +7,7 @@ import { styles } from "./styles/pokemonListStyles"
 const PokemonsList = () => {
     const { data: pokemons, isLoading, isError } = useQuery({ queryKey: ["pokemons"], queryFn: fetchPokemons })
 
-    if (isLoading) {
+    if (isLoading && !isError) {
         return (
             <View style={styles.container}>
                 <Text>Loading ... </Text>
