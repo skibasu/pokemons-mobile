@@ -9,6 +9,7 @@ type PokemonCartProps = {
 const PokemonCart = ({ pokemon: { name, imageSrc } }: PokemonCartProps) => {
     return (
         <Link
+            accessibilityRole="link"
             style={styles.elem}
             href={{
                 pathname: "/details/[name]",
@@ -17,7 +18,7 @@ const PokemonCart = ({ pokemon: { name, imageSrc } }: PokemonCartProps) => {
             asChild
         >
             <Pressable>
-                <Image accessibilityLabel={name} source={{ uri: imageSrc ?? undefined }} style={styles.image} resizeMode="contain" />
+                {imageSrc && <Image accessibilityLabel={name} source={{ uri: imageSrc }} style={styles.image} resizeMode="contain" />}
                 <Text style={styles.title}>{name}</Text>
             </Pressable>
         </Link>
