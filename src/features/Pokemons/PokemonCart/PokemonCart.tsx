@@ -17,7 +17,7 @@ const PokemonCart = ({ pokemon: { name, imageSrc } }: PokemonCartProps) => {
             asChild
         >
             <Pressable>
-                <Image source={{ uri: imageSrc ?? undefined }} style={styles.image} resizeMode="contain" />
+                <Image accessibilityLabel={name} source={{ uri: imageSrc ?? undefined }} style={styles.image} resizeMode="contain" />
                 <Text style={styles.title}>{name}</Text>
             </Pressable>
         </Link>
